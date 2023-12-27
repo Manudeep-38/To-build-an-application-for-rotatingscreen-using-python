@@ -1,0 +1,32 @@
+import tkinter as tk
+from tkinter import ttk
+from win32api import GetSystemMetrics
+import pyautogui
+
+# Create the window
+window = tk.Tk()
+window.title("Screen Rotator")
+
+# Function to rotate the screen
+def rotate_screen():
+    # Get the current screen size
+    screen_width = GetSystemMetrics(0)
+    screen_height = GetSystemMetrics(1)
+
+    # Get the current mouse position
+    mouse_x, mouse_y = pyautogui.position()
+
+    # Check if the mouse position is on the top or bottom side of the screen
+    if mouse_y <= screen_height / 2:
+        # Rotate the screen to the left
+        pyautogui.hotkey('win', 'left')
+    else:
+        # Rotate the screen to the right
+        pyautogui.hotkey('win', 'right')
+
+# Create a button to rotate the screen
+button_rotate = ttk.Button(window, text="Rotate Screen", command=rotate_screen)
+button_rotate.pack(padx=10, pady=10)
+
+# Run the application
+window.mainloop()
